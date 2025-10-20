@@ -1,3 +1,7 @@
+:root {
+    --background-color: #fccc5b;
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -65,6 +69,11 @@ nav .perfil-icon svg {
 
 nav .perfil-icon:hover {
     background-color: #2a2a2a;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
 }
 
 h1 {
@@ -136,14 +145,19 @@ h1 {
     background-color: rgb(57, 57, 57);
 }
 
-.conversas .mensagens img {
+.conversas .mensagens img,
+.conversa-contato .barra-superior img {
     max-height: 45px;
     max-width: 45px;
     border-radius: 50px;
     background-color: rgb(45, 45, 45);
+    margin: 0 13px;
+}
+
+.conversas .mensagens .foto-placeholder,
+.conversa-contato .barra-superior .foto-placeholder {
     color: #B6B6B6;
     border: 1px solid #535353;
-    margin: 0 13px;
 }
 
 .conversas .mensagens .info {
@@ -158,4 +172,92 @@ h1 {
 .conversas .mensagens .info .descricao {
     font-size: 0.9rem;
     color: #B6B6B6;
+}
+
+.conversa-contato {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background-color: var(--background-color);
+}
+
+.conversa-contato .barra-superior {
+    display: flex;
+    align-items: center;
+    max-height: 70px;
+    flex-grow: 1;
+    background-color: #161717;
+}
+
+.conversa-contato .barra-superior:hover {
+    cursor: pointer;
+}
+
+.conversa-contato .barra-superior .info-contato {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+}
+
+.conversa-contato .barra-superior .info-contato .nome {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.conversa-contato .barra-superior .info-contato .descricao {
+    font-size: 0.8rem;
+    color: #B6B6B6;
+}
+
+.conversa-contato .conversa {
+    flex-grow: 1;
+}
+
+.conversa-contato .area-digitacao {
+    display: flex;
+    height: 60px;
+    background-color: #2a2a2a;
+    margin: 0 15px 15px 15px;
+    border-radius: 50px;
+}
+
+.conversa-contato .area-digitacao input {
+    flex-grow: 1;
+    margin-left: 30px;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    background: none;
+    color: white;
+    caret-color: white;
+}
+
+.conversa-contato .area-digitacao .botao-enviar {
+    width: 46px;
+    height: 46px;
+    margin: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #565656;
+    border-radius: 50px;
+    transition: 0.2s;
+}
+
+.conversa-contato .area-digitacao .botao-enviar.contem-texto {
+    background-color: rgb(0, 255, 115);
+    cursor: pointer;
+}
+
+.conversa-contato .area-digitacao .botao-enviar.contem-texto:hover {
+    transform: scale(1.05);
+}
+
+.conversa-contato .area-digitacao .botao-enviar svg {
+    fill: rgb(141, 141, 141);
+}
+
+.conversa-contato .area-digitacao .botao-enviar svg.contem-texto {
+    fill: black;
 }
