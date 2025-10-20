@@ -112,3 +112,19 @@ h1 {
 .conversas .barra-pesquisa input::placeholder {
     color: #B6B6B6;
 }
+
+.conversas .mensagens {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.conversas .mensagens .contato {}
+
+.conversas .mensagens img {}
+
+.conversas .mensagens .info {}
+
+.conversas .mensagens .info .nome {}
+
+.conversas .mensagens .info .descricao {}
