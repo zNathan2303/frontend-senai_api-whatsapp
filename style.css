@@ -4,6 +4,7 @@
     box-sizing: border-box;
     list-style: none;
     font-family: "Poppins", sans-serif;
+    color: #FAFAFA;
 }
 
 a {
@@ -15,4 +16,53 @@ ul,
 ol,
 li {
     list-style: none;
+}
+
+body {
+    height: 100dvh;
+    background-color: #161717;
+    display: flex;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1D1F1F;
+    height: 100%;
+    width: 75px;
+}
+
+nav .area-icon {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: #2a2a2a;
+    border-radius: 50px;
+    margin: 12px;
+}
+
+nav .perfil-icon {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    margin: 12px;
+    transition: 0.3s;
+}
+
+nav .perfil-icon svg {
+    width: 28px;
+    height: 28px;
+    border-radius: 50px;
+    border: 1px solid #525252;
+    fill: #aeaeae;
+    background-color: #2a2a2a;
+}
+
+nav .perfil-icon:hover {
+    background-color: #2a2a2a;
 }
