@@ -29,9 +29,40 @@ function criarContato(contato) {
     contatos.append(contatoContainer)
 }
 
-async function carregarContatos() {
-    const contatos = await obterConteudo('https://backend-senai-api-whatsapp.onrender.com/v1/whatsapp/contatos/11987876567')
+function criarMensagem(mensagem) {
+    const conversa = document.getElementById('conversa')
+
+    const areaMensagem = document.createElement('div')
+    const areaTexto = document.createElement('div')
+    const mensagemText = document.createElement('div')
+    const horario = document.createElement('p')
+
+    mensagemText.textContent = mensagem.conteudo
+    horario.textContent = mensagem.horario
+
+    areaMensagem.classList.add('area-mensagem')
+    areaTexto.classList.add('area-texto')
+    horario.classList.add('horario')
+    mensagemText.classList.add('mensagem')
+    if (mensagem.remetente == 'me')
+        areaTexto.classList.add('minha-mensagem')
+
+    areaTexto.append(mensagemText, horario)
+    areaMensagem.append(areaTexto)
+    conversa.append(areaMensagem)
+}
+
+async function carregarContatos(numero) {
+    const contatos = await obterConteudo(`https://backend-senai-api-whatsapp.onrender.com/v1/whatsapp/contatos/${numero}`)
     contatos.contatos.forEach(criarContato)
 }
 
-carregarContatos()
+async function carregarConversa(numero, numeroContato) {
+    const mensagens = await obterConteudo(`https://backend-senai-api-whatsapp.onrender.com/v1/whatsapp/mensagens/conversa/${numero}?numero=${numeroContato}`)
+    for (let i = mensagens.mensagens.length - 1; i >= 0; i--) {
+        criarMensagem(mensagens.mensagens[i])
+    }
+}
+
+carregarContatos(11987876567)
+carregarConversa(11987876567, 26999999963)
