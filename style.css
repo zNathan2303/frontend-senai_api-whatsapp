@@ -124,14 +124,14 @@ h1 {
     color: #B6B6B6;
 }
 
-.conversas .mensagens {
+.conversas .contatos {
     display: flex;
     flex-direction: column;
     gap: 5px;
     margin-top: 20px;
 }
 
-.conversas .mensagens .contato {
+.conversas .contatos .contato {
     display: flex;
     align-items: center;
     height: 70px;
@@ -141,12 +141,12 @@ h1 {
     transition: 0.2s;
 }
 
-.conversas .mensagens .contato:hover {
+.conversas .contatos .contato:hover {
     cursor: pointer;
     background-color: rgb(57, 57, 57);
 }
 
-.conversas .mensagens img,
+.conversas .contatos img,
 .conversa-contato .barra-superior img {
     max-height: 45px;
     max-width: 45px;
@@ -155,13 +155,13 @@ h1 {
     margin: 0 13px;
 }
 
-.conversas .mensagens .foto-placeholder,
+.conversas .contatos .foto-placeholder,
 .conversa-contato .barra-superior .foto-placeholder {
     color: #B6B6B6;
     border: 1px solid #535353;
 }
 
-.conversas .mensagens .info {
+.conversas .contatos .info {
     flex-grow: 1;
     height: 100%;
     display: flex;
@@ -170,7 +170,7 @@ h1 {
     gap: 2px;
 }
 
-.conversas .mensagens .info .descricao {
+.conversas .contatos .info .descricao {
     font-size: 0.9rem;
     color: #B6B6B6;
 }
