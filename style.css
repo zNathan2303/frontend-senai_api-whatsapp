@@ -1,6 +1,7 @@
 :root {
     --background-color: #fccc5b;
     --limpar-input-pesquisa-geral: none;
+    --selacao-de-perfil: flex;
 }
 
 * {
@@ -58,6 +59,7 @@ nav .perfil-icon {
     border-radius: 50px;
     margin: 12px;
     transition: 0.3s;
+    cursor: pointer;
 }
 
 nav .perfil-icon svg {
@@ -318,4 +320,53 @@ h1 {
     background-color: #121313;
     color: #B6B6B6;
     user-select: none;
+}
+
+.selecionar-perfil {
+    display: var(--selacao-de-perfil);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #1D1F1F;
+    z-index: 100;
+}
+
+.selecionar-perfil .perfis {
+    display: flex;
+    gap: 30px;
+}
+
+.selecionar-perfil .perfil {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #2a2a2a;
+    padding: 20px;
+    gap: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.selecionar-perfil .perfil:hover {
+    transform: scale(1.1);
+}
+
+.selecionar-perfil>p {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.selecionar-perfil .perfil img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+    background-color: rgb(57, 57, 57);
 }

@@ -26,7 +26,7 @@ function criarContato(contato) {
 
     contatoContainer.addEventListener('click', () => {
         alterarConteudoDaBarraSuperior(contato.nome, contato.imagem)
-        carregarConversa(obterPerfil(), contato.numero)
+        carregarConversa(obterPerfilAtual(), contato.numero)
     })
 
     info.append(nome, descricao)
@@ -69,6 +69,38 @@ function alterarConteudoDaBarraSuperior(nome, imagem) {
     nomeText.textContent = nome
 }
 
+function criarPerfil(perfil) {
+    const perfis = document.getElementById('perfis')
+
+    const perfilContainer = document.createElement('div')
+    const foto = document.createElement('img')
+    const nick = document.createElement('p')
+
+    nick.textContent = perfil.nickname
+    foto.src = perfil['profile-image']
+    foto.onerror = () => {
+        foto.src = './img/contato-placeholder.svg'
+    }
+
+    perfilContainer.classList.add('perfil')
+
+    perfilContainer.dataset.account = perfil.account
+    perfilContainer.dataset.nickname = perfil.nickname
+    perfilContainer.dataset.image = perfil['profile-image']
+    perfilContainer.dataset.number = perfil.number
+    perfilContainer.dataset.background = perfil.background
+
+    perfilContainer.addEventListener('click', () => {
+        carregarContatos(perfil.number)
+        sessionStorage.setItem('perfil', perfil.number)
+        document.documentElement.style.setProperty('--selacao-de-perfil', 'none')
+        document.documentElement.style.setProperty('--background-color', perfil.background)
+    })
+
+    perfilContainer.append(foto, nick)
+    perfis.append(perfilContainer)
+}
+
 async function carregarContatos(numero) {
     const contatos = await obterConteudo(`https://backend-senai-api-whatsapp.onrender.com/v1/whatsapp/contatos/${numero}`)
     document.getElementById('contatos').replaceChildren()
@@ -85,7 +117,15 @@ async function carregarConversa(numero, numeroContato) {
         document.getElementById('mensagem-iniciar-conversa').remove()
 }
 
-function obterPerfil() { return sessionStorage.getItem('perfil') }
+async function carregarPerfis() {
+    const data = await obterConteudo('https://backend-senai-api-whatsapp.onrender.com/v1/whatsapp')
+    document.getElementById('perfis').replaceChildren()
+    data.usuarios.forEach(criarPerfil)
+}
+
+function obterPerfilAtual() {
+    return sessionStorage.getItem('perfil')
+}
 
 document.getElementById('input-mensagem').addEventListener('input', conteudo => {
     if (conteudo.target.value) {
@@ -117,6 +157,4 @@ document.getElementById('limpar-input-pesquisa-geral').addEventListener('click',
     document.getElementById('input-pesquisa-geral').value = ''
 })
 
-sessionStorage.setItem('perfil', 11987876567)
-
-carregarContatos(obterPerfil())
+carregarPerfis()
