@@ -24,6 +24,11 @@ function criarContato(contato) {
     nome.classList.add('nome')
     descricao.classList.add('descricao')
 
+    contatoContainer.addEventListener('click', () => {
+        alterarConteudoDaBarraSuperior(contato.nome, contato.imagem)
+        carregarConversa(obterPerfil(), contato.numero)
+    })
+
     info.append(nome, descricao)
     contatoContainer.append(foto, info)
     contatos.append(contatoContainer)
@@ -52,17 +57,35 @@ function criarMensagem(mensagem) {
     conversa.append(areaMensagem)
 }
 
+function alterarConteudoDaBarraSuperior(nome, imagem) {
+    const foto = document.getElementById('foto-barra-superior')
+    const nomeText = document.getElementById('nome-barra-superior')
+
+    foto.src = imagem
+    foto.onerror = () => {
+        foto.src = './img/contato-placeholder.svg'
+        foto.classList.add('foto-placeholder')
+    }
+    nomeText.textContent = nome
+}
+
 async function carregarContatos(numero) {
     const contatos = await obterConteudo(`https://backend-senai-api-whatsapp.onrender.com/v1/whatsapp/contatos/${numero}`)
+    document.getElementById('contatos').replaceChildren()
     contatos.contatos.forEach(criarContato)
 }
 
 async function carregarConversa(numero, numeroContato) {
     const mensagens = await obterConteudo(`https://backend-senai-api-whatsapp.onrender.com/v1/whatsapp/mensagens/conversa/${numero}?numero=${numeroContato}`)
+    document.getElementById('conversa').replaceChildren()
     for (let i = mensagens.mensagens.length - 1; i >= 0; i--) {
         criarMensagem(mensagens.mensagens[i])
     }
 }
 
-carregarContatos(11987876567)
-carregarConversa(11987876567, 26999999963)
+function obterPerfil() { return sessionStorage.getItem('perfil') }
+
+sessionStorage.setItem('perfil', 11987876567)
+
+carregarContatos(obterPerfil())
+carregarConversa(obterPerfil(), 26999999963)
