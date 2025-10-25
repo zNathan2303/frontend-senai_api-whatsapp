@@ -81,11 +81,42 @@ async function carregarConversa(numero, numeroContato) {
     for (let i = mensagens.mensagens.length - 1; i >= 0; i--) {
         criarMensagem(mensagens.mensagens[i])
     }
+    if (document.getElementById('mensagem-iniciar-conversa'))
+        document.getElementById('mensagem-iniciar-conversa').remove()
 }
 
 function obterPerfil() { return sessionStorage.getItem('perfil') }
 
+document.getElementById('input-mensagem').addEventListener('input', conteudo => {
+    if (conteudo.target.value) {
+        document.getElementById('botao-enviar').classList.add('contem-texto')
+        document.getElementById('botao-enviar-icon').classList.add('contem-texto')
+    } else {
+        document.getElementById('botao-enviar').classList.remove('contem-texto')
+        document.getElementById('botao-enviar-icon').classList.remove('contem-texto')
+    }
+})
+
+document.getElementById('botao-enviar').addEventListener('click', () => {
+    document.getElementById('botao-enviar').classList.remove('contem-texto')
+    document.getElementById('botao-enviar-icon').classList.remove('contem-texto')
+    document.getElementById('input-mensagem').value = ''
+    window.alert('O backend não recebe mensagens! (não possui endpoint POST)')
+})
+
+document.getElementById('input-pesquisa-geral').addEventListener('input', conteudo => {
+    if (conteudo.target.value) {
+        document.documentElement.style.setProperty('--limpar-input-pesquisa-geral', 'block')
+    } else {
+        document.documentElement.style.setProperty('--limpar-input-pesquisa-geral', 'none')
+    }
+})
+
+document.getElementById('limpar-input-pesquisa-geral').addEventListener('click', () => {
+    document.documentElement.style.setProperty('--limpar-input-pesquisa-geral', 'none')
+    document.getElementById('input-pesquisa-geral').value = ''
+})
+
 sessionStorage.setItem('perfil', 11987876567)
 
 carregarContatos(obterPerfil())
-carregarConversa(obterPerfil(), 26999999963)
